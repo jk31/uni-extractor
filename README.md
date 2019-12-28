@@ -1,5 +1,5 @@
 # uni-extractor
 
-* set up a conda env that has only the needed packages
+* set up an environment that has only the needed packages, I use conda
 * use pyinstaller to create the .exe
 * `pyinstaller -F -n extractor --noconsole my_program.py`
