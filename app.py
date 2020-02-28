@@ -10,6 +10,8 @@ import pandas as pd
 from zipfile import ZipFile
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
+# pyinstaller -F --noconsole -n extractor_comparer app.py
+
 layout = [
     [sg.Text('_' * 50)],
     [sg.Text('Merging and Extacting')],
@@ -17,7 +19,7 @@ layout = [
     [sg.Input(key='zip_input'), sg.FileBrowse(key="zip_input_browse")],
     [sg.Text('Select name:')],
     [sg.Input(default_text='NAME', key='name_input', size=(20, ))],
-    [sg.Text('If merging, select cut point:')],
+    [sg.Text('If you want to remove unneccesary pages for merging, set the cutpoint here:')],
     [sg.Input(default_text='2', key='cut_input', size=(2, ))],
     [sg.Text('Select process:')],
     [sg.Button('Merge', key='merge'), sg.Button('Extract', key='extract'
@@ -26,7 +28,7 @@ layout = [
     [sg.Text('Compare Documents')],
     [sg.Input(key='document_1_input'), sg.FileBrowse(key="document_1_browse")],
     [sg.Input(key='document_2_input'), sg.FileBrowse(key="document_2_browse")],
-    [sg.Button('Compare Documents', key='compare')],
+    [sg.Button('Compare', key='compare')],
     [sg.Text('_' * 50)],
     [sg.Text('Waiting...', key='process')],
     ]
