@@ -9,6 +9,7 @@ verify_ssl = true
 pypdf2 = "*"
 pandas = "*"
 pysimplegui = "*"
+pyinstaller = "*"
 
 [requires]
 python_version = "3.7"
