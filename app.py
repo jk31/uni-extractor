@@ -14,18 +14,19 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 
 layout = [
     [sg.Text('_' * 50)],
-    [sg.Text('Merging and Extacting')],
+    [sg.Text('Merging and Extracting', font=('Helvetica', 15))],
     [sg.Text('Select .zip file:')],
     [sg.Input(key='zip_input'), sg.FileBrowse(key="zip_input_browse")],
     [sg.Text('Select name:')],
     [sg.Input(default_text='NAME', key='name_input', size=(20, ))],
-    [sg.Text('If you want to remove unneccesary pages for merging, set the cutpoint here:')],
+    [sg.Text('If you want to remove unneccesary pages for merging,\nset the cutpoint here:')],
     [sg.Input(default_text='2', key='cut_input', size=(2, ))],
     [sg.Text('Select process:')],
     [sg.Button('Merge', key='merge'), sg.Button('Extract', key='extract'
      ), sg.Button('Extract and Merge', key='extract_and_merge')],
     [sg.Text('_' * 50)],
-    [sg.Text('Compare Documents')],
+    [sg.Text('Compare Documents' , font=('Helvetica', 15))],
+    [sg.Text("The results are in the folder of the first document.")],
     [sg.Input(key='document_1_input'), sg.FileBrowse(key="document_1_browse")],
     [sg.Input(key='document_2_input'), sg.FileBrowse(key="document_2_browse")],
     [sg.Button('Compare', key='compare')],
@@ -116,7 +117,7 @@ def comparing(document_1, document_2):
             for page in pdf_read.pages:
                 text = page.extractText()
                 text = re.sub('\n+', '', text)
-                text = text.split(".")
+                text = re.split("\. |\? ", text)
                 extract_list.extend(text)
 
     document_1_sentences = []
@@ -127,7 +128,7 @@ def comparing(document_1, document_2):
 
     in_both = list(set(document_1_sentences).intersection(document_2_sentences))
 
-    in_both_str = " \n".join(in_both)
+    in_both_str = " \n\n".join(in_both)
     with open(file_path + "\\" + f"compare-{time.time()}.txt", "w") as results:
         results.write(in_both_str)
 
